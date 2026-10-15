@@ -18,6 +18,44 @@ For Goat Entertainment
 
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
+    <script>
+      (function() {
+        var originalOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+          if (typeof url === 'string') {
+            if (url.indexOf('Inst-erect') !== -1) {
+              url = url.replace('Inst-erect', 'Inst');
+            }
+            if (url.indexOf('Voices-darnell-erect') !== -1) {
+              url = url.replace('Voices-darnell-erect', 'Voices-darnell');
+            }
+            if (url.indexOf('Voices-pico-erect') !== -1) {
+              url = url.replace('Voices-pico-erect', 'Voices-pico');
+            }
+          }
+          return originalOpen.call(this, method, url, async, user, password);
+        };
+
+        if (typeof window.fetch === 'function') {
+          var originalFetch = window.fetch;
+          window.fetch = function(resource, init) {
+            if (typeof resource === 'string') {
+              if (resource.indexOf('Inst-erect') !== -1) {
+                resource = resource.replace('Inst-erect', 'Inst');
+              }
+              if (resource.indexOf('Voices-darnell-erect') !== -1) {
+                resource = resource.replace('Voices-darnell-erect', 'Voices-darnell');
+              }
+              if (resource.indexOf('Voices-pico-erect') !== -1) {
+                resource = resource.replace('Voices-pico-erect', 'Voices-pico');
+              }
+            }
+            return originalFetch.call(this, resource, init);
+          };
+        }
+      })();
+    </script>
+
     <script type="text/javascript" src="Funkin.js"></script>
 
     <script>
