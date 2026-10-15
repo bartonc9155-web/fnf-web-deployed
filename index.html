@@ -20,17 +20,17 @@ For Goat Entertainment
 
     <script>
       (function() {
-        var mainCdnBase = "https://cdn.jsdelivr.net/gh/bubblfan/fridayfunk/assets/songs/darnell/";
+        var origin = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
 
         var originalOpen = XMLHttpRequest.prototype.open;
         XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
           if (typeof url === 'string') {
             if (url.indexOf('Inst-erect.mp3') !== -1) {
-              url = mainCdnBase + 'Inst-erect.mp3';
+              url = origin + 'assets/songs/darnell/Inst-erect.mp3';
             } else if (url.indexOf('Voices-darnell-erect.mp3') !== -1) {
-              url = mainCdnBase + 'Voices-darnell-erect.mp3';
+              url = origin + 'assets/songs/darnell/Voices-darnell-erect.mp3';
             } else if (url.indexOf('Voices-pico-erect.mp3') !== -1) {
-              url = mainCdnBase + 'Voices-pico-erect.mp3';
+              url = origin + 'assets/songs/darnell/Voices-pico-erect.mp3';
             }
           }
           return originalOpen.call(this, method, url, async, user, password);
@@ -41,11 +41,11 @@ For Goat Entertainment
           window.fetch = function(resource, init) {
             if (typeof resource === 'string') {
               if (resource.indexOf('Inst-erect.mp3') !== -1) {
-                resource = mainCdnBase + 'Inst-erect.mp3';
+                resource = origin + 'assets/songs/darnell/Inst-erect.mp3';
               } else if (resource.indexOf('Voices-darnell-erect.mp3') !== -1) {
-                resource = mainCdnBase + 'Voices-darnell-erect.mp3';
+                resource = origin + 'assets/songs/darnell/Voices-darnell-erect.mp3';
               } else if (resource.indexOf('Voices-pico-erect.mp3') !== -1) {
-                resource = mainCdnBase + 'Voices-pico-erect.mp3';
+                resource = origin + 'assets/songs/darnell/Voices-pico-erect.mp3';
               }
             }
             return originalFetch.call(this, resource, init);
